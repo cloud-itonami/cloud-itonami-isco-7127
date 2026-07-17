@@ -1,0 +1,11 @@
+[{:itonami.blueprint/social-impact [:technician-safety :equipment-reliability :service-continuity]
+  :itonami.blueprint/domain :trades/hvac-refrigeration-service-coordination
+  :itonami.blueprint/required-technologies [:robotics :identity :audit-ledger]
+  :itonami.blueprint/isco-08 "7127"
+  :itonami.blueprint/name "AC and Refrigeration Service Coordination Practice"
+  :itonami.blueprint/governor :hvac-mech-governor
+  :itonami.blueprint/robotics true
+  :db/id -1
+  :itonami.blueprint/status :public-oss
+  :itonami.blueprint/id "cloud-itonami-isco-7127"
+  :itonami.blueprint/license "AGPL-3.0-or-later"}]
