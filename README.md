@@ -11,7 +11,7 @@ This repository designs a forkable OSS business for an AC and refrigeration serv
 (`hvacmech.governor`), following the itonami actor pattern
 (ADR-2607121000): `:intake -> :advise -> :govern -> :decide -+-> :commit
 (:ok?) +-> :request-approval (:escalate?, human-in-the-loop interrupt)
-+-> :hold (:hard?)`. 22 tests / 47 assertions green (`clojure -M:test`).
++-> :hold (:hard?)`. 22 tests / 47 assertions green (`kbb -M:test`).
 HARD invariants (always hold, never overridable):
 technician provenance, service-account provenance, no-actuation
 (`:effect` must be `:propose`), a closed op-allowlist
