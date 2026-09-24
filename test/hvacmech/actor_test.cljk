@@ -1,5 +1,5 @@
 (ns hvacmech.actor-test
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [hvacmech.actor :as actor]
             [hvacmech.store :as store]))
 
