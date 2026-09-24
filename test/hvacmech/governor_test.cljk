@@ -1,5 +1,5 @@
 (ns hvacmech.governor-test
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [hvacmech.store :as store]
             [hvacmech.advisor :as advisor]
             [hvacmech.governor :as governor]))
