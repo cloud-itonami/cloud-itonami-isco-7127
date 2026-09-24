@@ -1,0 +1,35 @@
+;; What this vertical's robot physically does, declared for
+;; kotoba.robotics.process (kotoba-lang/robotics). `kbb -M:physics` runs it.
+;;
+;; README "Robotics premise": a service scheduling/logistics coordination
+;; robot for air-conditioning and refrigeration mechanics (ISCO 7127)
+;; schedules technicians, logs service calls, parts usage and diagnostic
+;; status, and coordinates refrigerant/parts supply orders; it never services
+;; a refrigeration system. Its physical work is parts logistics: carrying
+;; refrigerant cylinders and parts to the plant room, and keeping stocked
+;; cylinders out of overheating in the service van.
+;;
+;; Every number without a cited source is marked `estimate` in its :basis.
+;; Replacing an estimate with a sourced value is this bot's growth work.
+{:physics/schema "itonami.physical-ai.spec.v1"
+ :repo "cloud-itonami/cloud-itonami-isco-7127"
+ :cases
+ [{:id :cylinder-cart-to-plant-room
+   :kind :transport
+   :procedure "logistics robot carries refrigerant cylinders and a parts case (120 kg) from the loading bay to the plant room via the service corridor; the route length to the plant room is swept"
+   :params {:mass-kg 70.0 :payload-kg 120.0 :v-max-mps 1.2 :a-max-mps2 0.5
+            :brake-decel-mps2 0.8 :drive-force-n 220.0 :crr 0.02
+            :cog-height-m 0.35 :support-half-length-m 0.30 :payload-cog-height-m 0.55}
+   :sweep {:param :distance-m :values [30.0 50.0 70.0 100.0 130.0]}
+   :quantity :cycle-time-s
+   :limit {:max 90.0 :basis "estimate: one parts leg per service-call slot so the technician is not kept waiting on the roof"}
+   :boundary {:lo 10.0 :hi 300.0}}
+  {:id :cylinder-in-hot-van
+   :kind :thermal
+   :procedure "a stocked refrigerant cylinder (liquid charge ~120 mm from shell to centre, mixed by natural convection) sits in a closed service van at 65 C in summer; how long the robot may leave it there before the charge reaches the storage ceiling"
+   :params {:thickness-m 0.12 :conductivity-w-mk 5.0 :density-kg-m3 1100.0 :specific-heat-j-kgk 1500.0
+            :t0-c 25.0 :t-hot-c 65.0 :h-front-w-m2k 8.0 :h-back-w-m2k 0.0 :threshold-c 50.0}
+   :sweep {:param :duration-s :values [3600.0 7200.0 14400.0 21600.0 28800.0 43200.0]}
+   :quantity :peak-back-c
+   :limit {:max 50.0 :basis "estimate: order of the maximum storage temperature printed on refrigerant cylinder labels (commonly ~50 C; the exact value per cylinder standard is not verified here); the liquid is given an effective conductivity of 5 W/mK (estimate) standing in for natural-convection mixing"}
+   :boundary {:lo 600.0 :hi 86400.0}}]}
