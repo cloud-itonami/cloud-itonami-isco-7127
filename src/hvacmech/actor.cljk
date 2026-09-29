@@ -1,7 +1,7 @@
 (ns hvacmech.actor
   "HvacMechActor — the ISCO-08 7127 AC/refrigeration service
   scheduling/logistics coordination actor as a
-  `langgraph.graph/state-graph` (ADR-2607121000 / CLAUDE.md Actors
+  `langgraph.graph/state-graph` (ADR-2607121000 / AGENTS.md Actors
   section). One graph run = one service-coordination operation request
   (intake -> advise -> govern -> decide -> commit/hold, with a
   human-approval interrupt for escalated proposals). No infinite
