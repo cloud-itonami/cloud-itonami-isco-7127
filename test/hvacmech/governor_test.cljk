@@ -132,7 +132,7 @@
     (is (:escalate? v))))
 
 (deftest default-mock-advisor-proposals-never-self-trip-on-scope-exclusion
-  (testing "the governor's scope-exclusion term list must never match the mock advisor's own default rationale text for any allowlisted op — CLAUDE.md's known self-tripping bug pattern (rationale legitimately contains bare nouns like 'refrigerant'/'certification'/'technician', but never the full finalization-action phrases)"
+  (testing "the governor's scope-exclusion term list must never match the mock advisor's own default rationale text for any allowlisted op — AGENTS.md's known self-tripping bug pattern (rationale legitimately contains bare nouns like 'refrigerant'/'certification'/'technician', but never the full finalization-action phrases)"
     (let [st (fresh-store)
           adv (advisor/mock-advisor)
           ops [:log-service-record :schedule-service-operation
